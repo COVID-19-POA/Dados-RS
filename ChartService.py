@@ -31,6 +31,10 @@ class ChartService:
                                              municipio), datas))
       fig.add_trace(go.Scatter(x=datas, y=casos, mode='lines', name=municipio))
 
+    fig.update_layout(title='Histórico de Casos Confirmados no RS',
+                      xaxis_title='Data',
+                      yaxis_title='Casos')
+
     fig.show()
 
 
