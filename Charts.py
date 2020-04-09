@@ -3,7 +3,7 @@ import pandas as pd
 from APIServiceRS import APIServiceRS
 
 
-class ChartService:
+class Charts:
   def __init__(self):
     self.__api = APIServiceRS()
     self.__data_confirmados = None
@@ -39,5 +39,5 @@ class ChartService:
 
 
 # Exemplo de uso
-# chart = ChartService()
+# chart = Charts()
 # chart.plot_historico_confirmados()
