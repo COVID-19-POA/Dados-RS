@@ -67,17 +67,13 @@ class APIServiceRS:
 
   # Retorna o histórico de casos confirmados dos municípios. Dados ficam em cache para evitar requests desnecessárias, mas se precisar refazer, chamar com force_request como True
   def get_historico_confirmados_municipio(self, force_request=False):
-    if force_request:
-      self.__request_historico_confirmados()
-    elif self.__confirmed_data == None:
+    if force_request or self.__confirmed_data == None:
       self.__request_historico_confirmados()
     return self.__parse_historico_municipio(self.__confirmed_data)
 
   # Retorna o histórico de casos de morte dos municípios. Dados ficam em cache para evitar requests desnecessárias, mas se precisar refazer, chamar com force_request como True
   def get_historico_mortes_municipio(self, force_request=False):
-    if force_request:
-      self.__request_historico_mortes()
-    elif self.__mortes_data == None:
+    if force_request or self.__mortes_data == None:
       self.__request_historico_mortes()
     return self.__parse_historico_municipio(self.__mortes_data)
 
