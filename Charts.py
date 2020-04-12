@@ -1,6 +1,10 @@
 import plotly.graph_objects as go
-import pandas as pd
 from APIServiceRS import APIServiceRS
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as mp
+from matplotlib import cm
+from matplotlib.colors import ListedColormap, LinearSegmentedColormap
 
 
 class Charts:
@@ -36,6 +40,27 @@ class Charts:
                       yaxis_title='Casos')
 
     fig.show()
+
+  def plot_matrix_color_code(self, file_name):
+    #viridis = cm.get_cmap('viridis', 256)
+    top = cm.get_cmap('Oranges_r', 128)
+    bottom = cm.get_cmap('Blues', 128)
+
+    newcolors = np.vstack(
+      (top(np.linspace(0, 1, 128)), bottom(np.linspace(0, 1, 128))))
+    #newcolors = viridis(np.linspace(0, 1, 256))
+    newcmp = ListedColormap(newcolors)
+
+    fig, plot = mp.subplots(1, 1, figsize=(10, 10), constrained_layout=True)
+
+    data = pd.read_csv(file_name)
+    data = data.drop('UID', axis=1)
+    data = data.drop(data.index[0])
+
+    psm = plot.pcolormesh(data, cmap=newcmp, rasterized=True)
+    fig.colorbar(psm, ax=plot)
+    mp.show()
+    fig.savefig('vis.png', dpi=600)
 
 
 # Exemplo de uso
